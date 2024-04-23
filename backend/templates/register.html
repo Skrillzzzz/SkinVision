@@ -8,26 +8,10 @@
 <body>
     <h1>Register</h1>
     <form method="POST">
-        <!-- CSRF token -->
-        {{ form.csrf_token }}
-        
-        <!-- Username field -->
-        <label for="username">Username:</label>
-        {{ form.username }}
-
-        <!-- Email field -->
-        <label for="email">Email:</label>
-        {{ form.email }}
-
-        <!-- Password field -->
-        <label for="password">Password:</label>
-        {{ form.password }}
-
-        <!-- Confirm Password field -->
-        <label for="confirm_password">Confirm Password:</label>
-        {{ form.confirm_password }}
-
-        <!-- Submit button -->
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
         <button type="submit">Register</button>
     </form>
 </body>
