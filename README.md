@@ -37,22 +37,22 @@ SkinVisionApp/
 
 ## 🧪 How to Run Locally
 
-1. **Clone the repository**
+1. **Clone the repository**  
 git clone https://github.com/Skrillzzzz/SkinVision.git  
 cd SkinVisionApp
 
-2. **Set up a virtual environment**
+2. **Set up a virtual environment**  
 python -m venv venv  
 source venv/bin/activate  # On Windows: venv\Scripts\activate  
 Python Interpreter: /backend/venv/bin/python
 
-3. **Run migrations**
+3. **Run migrations**  
 python manage.py migrate
 
-4. **Start the development server**
+4. **Start the development server**  
 python manage.py runserver
 
-5. **Access the app**
+5. **Access the app**  
 Visit http://127.0.0.1:8000 in your browser.
 
 ## 🧪 Usage Instructions
