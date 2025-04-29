@@ -61,9 +61,8 @@ python manage.py migrate
 python manage.py runserver
 ```
 5. **Access the app**  
-```
-Visit http://127.0.0.1:8000 in your browser.
-```
+Visit [SkinVision](http://127.0.0.1:8000) in your browser.
+
 
 ## 🧪 Usage Instructions
 
