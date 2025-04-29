@@ -5,6 +5,7 @@ SkinVision is a web-based tool designed to assist medical professionals and rese
 ## 🎓 Dissertation Context
 
 This project was built as part of my final-year dissertation for a BSc in Software Engineering at Manchester Metropolitan University. It aims to support medical professionals by providing a simple, accessible interface for labelling skin cancer features in medical imagery.
+
 ## 🚀 Features
 
 🖼️ Upload dermoscopic images for analysis
