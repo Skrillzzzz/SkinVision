@@ -9,17 +9,17 @@ This project was built as part of my final-year dissertation for a BSc in Softwa
 ## 🚀 Features
 
 🖼️ Upload dermoscopic images for analysis  
-✍️ Annotate and label key skin features
-💾 Save annotation data in a structured SQL database
-📤 Export data for medical or academic use
+✍️ Annotate and label key skin features  
+💾 Save annotation data in a structured SQL database  
+📤 Export data for medical or academic use  
 🔐 Basic user authentication
 
 
 ## 🛠️ Tech Stack
 
-Backend: Python, Django
-Frontend: HTML, CSS, JavaScript
-Database: SQLite (dev) | PostgreSQL (prod-ready)
+Backend: Python, Django  
+Frontend: HTML, CSS, JavaScript  
+Database: SQLite (dev) | PostgreSQL (prod-ready)  
 Tools: Django Admin, Pillow, Git/GitHub
 
 ## 📁 File Structure
@@ -47,11 +47,11 @@ skinvision/
 ## 🧪 How to Run Locally
 
 # 1. Clone the repository
-git clone https://github.com/Skrillzzzz/SkinVision.git
+git clone https://github.com/Skrillzzzz/SkinVision.git  
 cd SkinVision
 
 # 2. Set up a virtual environment
-python -m venv venv
+python -m venv venv  
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # 3. Install dependencies
@@ -72,9 +72,9 @@ Visit http://127.0.0.1:8000 in your browser.
 
 ## 🧪 Future Improvements
 
-Support for multiple annotation shapes (polygon, brush)
-Advanced filtering and image tagging
-Integration with machine learning models for predictive analysis
+Support for multiple annotation shapes (polygon, brush)  
+Advanced filtering and image tagging  
+Integration with machine learning models for predictive analysis  
 Docker support for easier deployment
 
 ## 🙋‍♂️ Author
