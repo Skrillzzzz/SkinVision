@@ -19,7 +19,7 @@ Database: SQLite (dev) | PostgreSQL (prod-ready)
 Tools: Django Admin, Pillow, Git/GitHub
 
 ## 📁 File Structure
-<pre> <code> skinvision/ ├── annotations/ # App for handling image and annotation logic │ ├── migrations/ │ ├── models.py │ ├── views.py │ └── urls.py │ ├── users/ # Handles user registration and login │ ├── models.py │ └── views.py │ ├── templates/ # HTML templates ├── static/ # Static JS and CSS files ├── media/ # Uploaded images ├── db.sqlite3 # Database file (for local use) ├── manage.py └── requirements.txt </code> </pre>
+<pre lang="markdown"> ```text skinvision/ ├── annotations/ # App for handling image and annotation logic │ ├── migrations/ │ ├── models.py │ ├── views.py │ └── urls.py │ ├── users/ # Handles user registration and login │ ├── models.py │ └── views.py │ ├── templates/ # HTML templates ├── static/ # Static JS and CSS files ├── media/ # Uploaded images ├── db.sqlite3 # Database file (for local use) ├── manage.py └── requirements.txt ``` </pre>
 
 ## 🧪 How to Run Locally
 
