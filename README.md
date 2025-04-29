@@ -2,6 +2,9 @@
 
 SkinVision is a web-based tool designed to assist medical professionals and researchers in annotating dermoscopic images for skin cancer diagnosis. Users can upload skin images, draw annotations directly on them, and export the data for machine learning or clinical review.
 
+## 🎓 Dissertation Context
+
+This project was built as part of my final-year dissertation for a BSc in Software Engineering at Manchester Metropolitan University. It aims to support medical professionals by providing a simple, accessible interface for labelling skin cancer features in medical imagery.
 ## 🚀 Features
 
 🖼️ Upload dermoscopic images for analysis
@@ -47,8 +50,8 @@ git clone https://github.com/Skrillzzzz/SkinVision.git
 cd SkinVision
 
 # 2. Set up a virtual environment
-python -m venv env
-source env/bin/activate  # On Windows: env\Scripts\activate
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
@@ -59,13 +62,22 @@ python manage.py migrate
 # 5. Start the development server
 python manage.py runserver
 
-# 6. Visit http://127.0.0.1:8000 in your browser.
+# 6. Access the app
+Visit http://127.0.0.1:8000 in your browser.
 
 ## 📸 Screenshots
 
-(You can add images to a /screenshots folder and embed them here like this:)
 ![Annotation Interface](screenshots/annotation-ui.png)
 
-## 🎓 Dissertation Context
+## 🧪 Future Improvements
 
-This project was built as part of my final-year dissertation for a BSc in Software Engineering at Manchester Metropolitan University. It aims to support medical professionals by providing a simple, accessible interface for labelling skin cancer features in medical imagery.
+Support for multiple annotation shapes (polygon, brush)
+Advanced filtering and image tagging
+Integration with machine learning models for predictive analysis
+Docker support for easier deployment
+
+## 🙋‍♂️ Author
+
+Andrew Melving
+Software Engineering Graduate | Cybersecurity & Full-Stack Enthusiast
+[LinkedIn](https://www.linkedin.com/in/andrew-melving-138483209/) | [GitHub](https://github.com/Skrillzzzz/SkinVision/edit/main/README.md)
