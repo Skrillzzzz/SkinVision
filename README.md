@@ -45,18 +45,25 @@ cd SkinVisionApp
 ```
 
 2. **Set up a virtual environment**  
-*python -m venv venv  
+```
+python -m venv venv  
 source venv/bin/activate  # On Windows: venv\Scripts\activate  
-Python Interpreter: /backend/venv/bin/python*
+Python Interpreter: /backend/venv/bin/python
+```
 
 3. **Run migrations**  
-*python manage.py migrate*
+```
+python manage.py migrate
+```
 
 4. **Start the development server**  
-*python manage.py runserver*
-
+```
+python manage.py runserver
+```
 5. **Access the app**  
-*Visit http://127.0.0.1:8000 in your browser.*
+```
+Visit http://127.0.0.1:8000 in your browser.
+```
 
 ## 🧪 Usage Instructions
 
