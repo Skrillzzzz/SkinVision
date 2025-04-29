@@ -81,4 +81,4 @@ Docker support for easier deployment
 
 Andrew Melving  
 Software Engineering Graduate | Cybersecurity & Full-Stack Enthusiast  
-[LinkedIn](https://www.linkedin.com/in/andrew-melving-138483209/) | [GitHub](https://github.com/Skrillzzzz/SkinVision/edit/main/README.md)
+[LinkedIn](https://www.linkedin.com/in/andrew-melving-138483209/) | [GitHub](https://github.com/Skrillzzzz/)
