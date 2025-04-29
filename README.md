@@ -37,9 +37,12 @@ SkinVisionApp/
 
 ## 🧪 How to Run Locally
 
-1. **Clone the repository**  
-*git clone https://github.com/Skrillzzzz/SkinVision.git  
-cd SkinVisionApp*
+1. **Clone the repository**
+   
+```
+git clone https://github.com/Skrillzzzz/SkinVision.git  
+cd SkinVisionApp
+```
 
 2. **Set up a virtual environment**  
 *python -m venv venv  
