@@ -8,7 +8,7 @@ This project was built as part of my final-year dissertation for a BSc in Softwa
 
 ## 🚀 Features
 
-🖼️ Upload dermoscopic images for analysis
+🖼️ Upload dermoscopic images for analysis  
 ✍️ Annotate and label key skin features
 💾 Save annotation data in a structured SQL database
 📤 Export data for medical or academic use
