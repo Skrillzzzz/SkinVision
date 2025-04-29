@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+
+{% block title %}Annotation Interface - SkinVisionApp{% endblock %}
+
+{% block content %}
+    <h1> Annotation Tool</h1>
+    <div id="annotation-controls">
+        <label for="colorPicker">Color: </label>
+        <input type="color" id="colorPicker" value="#000000">
+
+        <button id="draw">Draw</button>
+        <button id="eraser">Eraser</button>
+        <button id="drawLine">Line</button>
+        <button id="drawRect">Rectangle</button>
+        <button id="drawCircle">Circle</button>
+
+        <label for="lineWidth">Line Width: </label>
+        <input type="range" id="lineWidth" min="1" max="20" value="5">
+
+        <button id="save-annotations">Save Annotations</button>
+        <button id="discard-annotations">Discard Annotations</button>
+    </div>
+
+
+    <canvas id="drawingCanvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" id="imageUpload" name="image" accept="image/*" required>
+        <button id="imageUpload" type="submit">Upload</button>
+    </form>
+
+    <p>Once annotations are saved, head to the <a href="{% url 'upload_image' %}">Image Upload page</a> to save your annotated image to your profile.</p>
+
+{% endblock %}
+
+{% block scripts%}
+    <script>
+        var img = new Image();
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            var canvas = document.getElementById('drawingCanvas');
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            var shapes = [];
+            var currentTool = 'draw';
+            var currentColor = document.getElementById('colorPicker').value;
+            var lineWidth = document.getElementById('lineWidth').value;
+            var startX, startY;
+            var isDrawing = false;
+
+            document.getElementById('colorPicker').addEventListener('change', function(e) {
+                currentColor = e.target.value;
+                if (currentTool !== 'erase') {
+                    ctx.strokeStyle = currentColor;
+                }
+            });
+
+            document.getElementById('lineWidth').addEventListener('input', function(e) {
+                lineWidth = e.target.value;
+            });
+
+            document.getElementById('draw').addEventListener('click', function() {
+                currentTool = 'draw';
+            });
+
+            /*document.getElementById('eraser').addEventListener('click', function() {
+                currentTool = 'erase';
+                ctx.strokeStyle = '#FFFFFF'; // Set stroke style to white for erasing
+            });*/
+
+            document.getElementById('drawLine').addEventListener('click', function() { currentTool = 'line'; });
+            document.getElementById('drawRect').addEventListener('click', function() { currentTool = 'rect'; });
+            document.getElementById('drawCircle').addEventListener('click', function() { currentTool = 'circle'; });
+
+            function getMousePos(canvas, evt) {
+                var rect = canvas.getBoundingClientRect(); // Gets the absolute position of the canvas
+                return {
+                    x: evt.clientX - rect.left,
+                    y: evt.clientY - rect.top
+                };
+            }
+
+            function handleMouseUp(e) {
+                var pos = getMousePos(canvas, e);
+                if (currentTool === 'erase') {
+                    ctx.beginPath();
+                } else if (currentTool !== 'draw') {
+                    var shape = {
+                        type: currentTool,
+                        color: currentColor,
+                        lineWidth: lineWidth,
+                        startX: startX,
+                        startY: startY,
+                        endX: pos.x, 
+                        endY: pos.y  
+                    };
+                    shapes.push(shape);
+                    redrawCanvas();
+                }
+                isDrawing = false;
+            }
+            
+
+            function handleMouseDown(e) {
+                var pos = getMousePos(canvas, e);
+                startX = pos.x;
+                startY = pos.y;            
+                if (currentTool === 'draw') {
+                    shapes.push({type: 'draw', color: currentColor, lineWidth: lineWidth, path: [{x: startX, y: startY}]});
+                }
+                isDrawing = true;
+            }
+
+            function handleMouseMove(e) {
+                if (!isDrawing) return;
+                var pos = getMousePos(canvas, e);
+                if (currentTool === 'draw' || currentTool === 'erase') {
+                    shapes[shapes.length - 1].path.push({x: pos.x, y: pos.y});
+                    redrawCanvas();
+                } else {
+                    redrawCanvas();
+                    drawShapePreview(pos.x, pos.y);
+                }
+            }
+            
+
+            canvas.addEventListener('mousedown', handleMouseDown);
+            canvas.addEventListener('mouseup', handleMouseUp);
+            canvas.addEventListener('mousemove', handleMouseMove);
+
+            document.getElementById('imageUpload').addEventListener('change', function(e) {
+                var file = e.target.files[0];
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    img.onload = function() {
+                        const maxDimension = 800;  // Max size for canvas
+                        let scale = Math.min(maxDimension / img.width, maxDimension / img.height);
+                        canvas.width = img.width * scale; // Adjust canvas size based on scale
+                        canvas.height = img.height * scale;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Draw resized image
+                        ctx.fillStyle = "#FFFFFF"; // Reset fill style after image load
+                    };
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+            
+
+            function saveAnnotations() {
+                var canvas = document.getElementById('drawingCanvas');
+                var imageData = canvas.toDataURL('image/png');  // Use 'image/jpeg' for JPEG format
+            
+                // Create a link element to trigger the download
+                var downloadLink = document.createElement('a');
+                downloadLink.href = imageData;
+                downloadLink.download = 'annotated-image.png';  // Change the file extension to '.jpg' for JPEG
+            
+                // Trigger the download
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            }
+            
+
+            document.getElementById('save-annotations').addEventListener('click', saveAnnotations);
+
+            document.getElementById('discard-annotations').addEventListener('click', function() {
+                shapes = [];
+                redrawCanvas();
+            });
+
+            function redrawCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
+                if (img.src) ctx.drawImage(img, 0, 0, canvas.width, canvas.height); // Redraw the image first
+                shapes.forEach(function(shape) {
+                    ctx.beginPath();
+                    ctx.lineWidth = shape.lineWidth;
+                    ctx.strokeStyle = shape.color;
+                    if (shape.type === 'draw') {
+                        ctx.moveTo(shape.path[0].x, shape.path[0].y);
+                        shape.path.forEach(point => {
+                            ctx.lineTo(point.x, point.y);
+                        });
+                    } else {
+            
+                        switch (shape.type) {
+                            case 'line':
+                                ctx.moveTo(shape.startX, shape.startY);
+                                ctx.lineTo(shape.endX, shape.endY);
+                                break;
+                            case 'rect':
+                                ctx.rect(shape.startX, shape.startY, shape.endX - shape.startX, shape.endY - shape.startY);
+                                break;
+                            case 'circle':
+                                var radius = Math.sqrt(Math.pow((shape.endX - shape.startX), 2) + Math.pow((shape.endY - shape.startY), 2));
+                                ctx.arc(shape.startX, shape.startY, radius, 0, Math.PI * 2, false);
+                                break;
+                        }
+                    }
+                    ctx.stroke();
+                    ctx.closePath();
+                });
+            }
+
+            function drawShapePreview(x, y) {
+                ctx.beginPath();
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = currentColor;
+                switch (currentTool) {
+                    case 'line':
+                        ctx.moveTo(startX, startY);
+                        ctx.lineTo(x, y);
+                        break;
+                    case 'rect':
+                        ctx.rect(startX, startY, x - startX, y - startY);
+                        break;
+                    case 'circle':
+                        var radius = Math.sqrt(Math.pow((x - startX), 2) + Math.pow((y - startY), 2));
+                        ctx.arc(startX, startY, radius, 0, Math.PI * 2, false);
+                        break;
+                }
+                ctx.stroke();
+                ctx.closePath();
+            }
+        });
+    </script>
+{% endblock %}
+

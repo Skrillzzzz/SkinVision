@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Skin Vision{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1>Who are we?</h1>
+        <p>Founded in 2024, Skin Vision is designed to streamline the process of annotating images and tracking changes over time. Perfect for professionals in various fields, our tool helps you annotate, analyze, and share insights easily.</p>
+    </div>
+    <div class="card">
+        <h2>Welcome!</h2>
+        <p>Here's a quick look at your profile details:</p>
+        <p>Username: {{ username }}</p>
+        <p>Email: {{ email }}</p>
+        <a href="{% url 'profile' %}">View/Edit Profile</a>
+    </div>
+    <div class="card">
+        <h2>Image Gallery</h2>
+        <p>You have {{ user_images.count }} images uploaded.</p>
+        <a href="{% url 'profile' %}">View Images</a>
+    </div>
+{% endblock %}
