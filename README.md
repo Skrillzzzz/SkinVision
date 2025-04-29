@@ -66,7 +66,28 @@ python manage.py runserver
 # 6. Access the app
 Visit http://127.0.0.1:8000 in your browser.
 
-## 📸 Screenshots
+## 📸 Pages
+### 🖌️ Annotation Tool
+![Annotation Tool](Pages/Annotation%20Tool.png)
+
+### 📊 Dashboard
+![Dashboard](Pages/Dashboard.png)
+
+### 🧑‍💼 User Profile
+![User Profile](Pages/User%20Profile.png)
+
+### 🔐 Login / Register
+![Login](Pages/Login.png)
+![Register](Pages/Register.png)
+
+### 🖼️ Upload Image
+![Upload Image](Pages/UploadImage.png)
+
+### 👥 Registered Users
+![Registered Users](Pages/RegisteredUsers.png)
+
+### ✏️ Edit Profile
+![Edit Profile](Pages/Edit%20Profile.png)
 
 ![Annotation Interface](screenshots/annotation-ui.png)
 
